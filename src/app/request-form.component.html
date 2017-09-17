@@ -1,0 +1,145 @@
+<div class="btn-group" ngbRadioGroup name="radioBasic" [(ngModel)]="language">
+  <label ngbButtonLabel class="btn btn-primary">
+    <input ngbButton type="radio" value="de">{{ 'german' | translate}}
+  </label>
+  <label ngbButtonLabel class="btn btn-primary">
+    <input ngbButton type="radio" value="en">{{ 'english' | translate}}
+  </label>
+  <label ngbButtonLabel class=""class="btn btn-primary">
+    <input ngbButton type="radio" value="ar">{{ 'arabic' | translate}}
+  </label>
+</div>
+
+<div class="container pt-5">
+  <div [hidden]="submitted">
+    <h1>{{ 'requestform.title' | translate }}</h1>
+    <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
+      <div class="form-group row pt-3">
+        <label for="langSelect" class="col-sm-2 col-form-label">Sprache(n)</label>
+        <div class="col-sm">
+          <div *ngIf="languagesObservable | async; else loading; let languages">
+            <select required multiple class="form-control" id="langSelect" [(ngModel)]="model.languages" name="languages">
+              <option *ngFor="let l of languages" [value]="l">{{l.label}}</option>
+           </select>
+          </div>
+          <ng-template #loading><div class="loader"></div></ng-template>
+        </div>
+        <div id="langdHelpBlock" class="col-sm-4 form-text text-muted">
+          Bitte wählen sie eine oder mehrere Sprachen aus.
+          <i>Ihre benötigte Sprache ist nicht dabei? Wenden sie sich bitte an: </i>
+          <a href="http://www.koeln-freiwillig.de/">KFA</a>,
+          <a href="https://healthbuddies.jimdo.com/">Health Buddies</a>,
+          <a href="http://www.bikup.de/">Bikup (kostenpflichtig)</a>,
+          <a href="http://www.sprachundintegrationsmittler.org/">SprInt (kostenpflichtig)</a>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="date" class="col-sm-2 col-form-label">Zeitpunkt</label>
+        <div class="col-sm">
+          <ngb-datepicker required id="date" name="date" [(ngModel)]="model.date" showWeekNumbers=true></ngb-datepicker>
+        </div>
+
+        <div class="col-sm">
+          <ngb-timepicker required id="time" name="time" [(ngModel)]="model.time" [minuteStep]="15"></ngb-timepicker>
+        </div>
+
+        <div id="langdHelpBlock" class="col-sm-4 form-text text-muted">
+          Bitte wählen sie einen Zeitpunkt aus. Für mehrere Anfragen bitte für jeden Termin das Formular einzeln ausfüllen. <i>Beachten Sie, dass wir eine Vorlaufzeit von mindestens 3 Tagen benötigen.</i>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="exampleTextarea" class="col-sm-2 col-form-label">Anlass</label>
+        <div class="col-sm-6">
+          <textarea id="exampleTextarea" required class="form-control"
+            placeholder="z.B. Arzttermin / Behördengang" aria-describedby="passwordHelpBlock" [(ngModel)]="model.ocation" name="ocation" style="height: 100px;"></textarea>
+        </div>
+        <div id="passwordHelpBlock" class="col-sm-4 form-text text-muted">
+          Beschreiben Sie kurz den Anlass für den Sie einen Sprachbegleiter benötigen. <i>Bitte geben Sie aus Datenschutzgründen keine personenbezogenen Daten an.</i>
+        </div>
+      </div>
+
+      <div class="pt-5"></div>
+
+      <h4>Adresse des Termins</h4>
+
+      <div class="form-group row">
+        <label for="street" class="col-sm-2 col-form-label">Straße / Hausnummer</label>
+        <div class="col-sm-6">
+          <input id="street" required class="form-control" [(ngModel)]="model.street" name="street" aria-describedby="streetHelpBlock"/>
+        </div>
+        <div id="streetHelpBlock" class="col-sm-4 form-text text-muted">Straße und Hausnummer des Termins. Bitte geben Sie die vollständige Adresse an.</div>
+      </div>
+
+      <div class="form-group row">
+        <label for="city" class="col-sm-2 col-form-label">Stadt</label>
+        <div class="col-sm-3">
+          <input id="city" required class="form-control" [(ngModel)]="model.city" name="city"aria-describedby="cityHelpBlock"/>
+        </div>
+
+        <label for="postalcode" class="col-sm-1 col-form-label">PLZ</label>
+        <div class="col-sm-2">
+          <input id="postalcode" type="number" ng-maxlength="99999" required class="form-control" [(ngModel)]="model.postalCode" name="postalCode" aria-describedby="cityHelpBlock"/>
+        </div>
+
+        <div id="cityHelpBlock" class="col-sm-4 form-text text-muted">Stadt und Postleitzahl des Termins. Bitte geben Sie die vollständige Adresse an.</div>
+      </div>
+
+      <p><i>Bitte beachten Sie, dass die Sprachbegleiter ehrenamtlich arbeiten. Um ihnen einen hohen Zeitaufwand zu ersparen, bitten wir Sie darum, bei Arztterminen / Behördengängen davon abzusehen, als Treffpunkt die Adresse der Unterkunft anzugeben. Bitte geben Sie hier die Adresse des Treffpunkts an (z.B. Adresse der Arztpraxis bzw. der Behörde)</i></p>
+
+      <div class="pt-5"></div>
+
+      <h4>Ihre Kontaktdaten</h4>
+
+      <div class="form-group row">
+        <label for="email" class="col-sm-2 col-form-label">E-Mail Adresse</label>
+        <div class="col-sm-6">
+          <input id="email" type="email" required class="form-control" aria-describedby="emailHelpBlock"  [(ngModel)]="model.email" name="email" email/>
+        </div>
+
+        <div id="emailHelpBlock" class="col-sm-4 form-text text-muted">E-Mail Adresse</div>
+      </div>
+
+      <div class="form-group row">
+        <label for="phone" class="col-sm-2 col-form-label">Telefonnummer</label>
+        <div class="col-sm-6">
+          <input id="phone" required class="form-control" [(ngModel)]="model.phonenumber" name="phonenumber" aria-describedby="phoneHelpBlock"/>
+        </div>
+
+        <div id="phoneHelpBlock" class="col-sm-4 form-text text-muted">Telefonnummer</div>
+      </div>
+      <div class="pt-5"></div>
+      <button type="submit" class="btn btn-success" [disabled]="!heroForm.form.valid">Anfrage senden</button>
+      <div class="pb-5"></div>
+    </form>
+  </div>
+  <div [hidden]="!submitted">
+    <h2>Sie haben die folgenden Daten übermittelt</h2>
+
+    <p class="bg-warning">{{errorMessage}}</p>
+
+    <div class="row">
+      <div class="col-2">Nummer</div>
+      <div class="col-10">{{ requestid }}</div>
+    </div>
+    <div class="row">
+      <div class="col-2">Sprache(n)</div>
+      <div class="col-10">{{ getLanguagesList() }}</div>
+    </div>
+    <div class="row">
+      <div class="col-2">Datum</div>
+      <div class="col-10">{{ getFormattedDateTime() }}</div>
+    </div>
+    <div class="row">
+      <div class="col-2">Anlass</div>
+      <div class="col-10">{{ model.ocation }}</div>
+    </div>
+    <div class="row">
+      <div class="col-2">E-Mail</div>
+      <div class="col-10">{{ model.email }}</div>
+    </div>
+    <!-- <br>
+    <button class="btn btn-primary" (click)="submitted=false">Edit</button> -->
+  </div>
+</div>

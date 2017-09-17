@@ -1,0 +1,14 @@
+.ng-valid[required]:not(ngb-timepicker), .ng-valid.required  {
+  border-left: 5px solid #42A948; /* green */
+}
+.ng-invalid:not(form):not(ngb-timepicker) {
+  border-left: 4px solid #991b34; /* red */
+}
+
+ngb-timepicker.ng-valid[required] .form-control {
+  border-left: 5px solid #42A948; /* green */
+}
+
+ngb-timepicker.ng-invalid[required] .form-control {
+  border-left: 4px solid #991b34; /* red */
+}

@@ -1,0 +1,8 @@
+{
+  "german" : "German",
+  "english" : "English",
+  "arabic" : "Arabic",
+  "requestform": {
+    "title": "Apply for a language translator"
+  }
+}

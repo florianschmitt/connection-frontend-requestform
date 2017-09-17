@@ -1,0 +1,15 @@
+apply plugin: 'java'
+
+group 'de.florianschmitt'
+version '1.0'
+
+task buildDist(type:Exec) {
+  commandLine 'cmd', '/c', 'npm', 'run', 'build'
+}
+
+task jar(type: Jar, overwrite: true) {
+    dependsOn buildDist
+    from(fileTree("dist")) {
+        into "META-INF/resources/webjars/frontend-request/"
+    }
+}

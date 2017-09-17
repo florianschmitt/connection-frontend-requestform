@@ -1,1 +1,25 @@
-/* You can add global styles to this file, and also import other style files */
+h1 {
+  color: #369;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 250%;
+}
+
+.loader {
+  margin: -50px 0 0 -50px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100px;
+  height: 100px;
+  border: 16px solid #f3f3f3;
+  border-top: 16px solid #3498db;
+  border-bottom: 16px solid #3498db;
+  border-radius: 50%;
+  z-index: 1;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
