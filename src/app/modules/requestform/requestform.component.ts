@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Request }    from './model/request';
-import { Language }    from './model/language';
-import { LanguageService }       from './language.service';
-import { RequestService }       from './request.service';
-import { I18n }       from './i18n/I18n.service';
+import { Request } from '../../model/request';
+import { Language } from '../../model/language';
+import { LanguageService } from '../../services/language.service';
+import { RequestService } from '../../services/request.service';
+import { I18nService } from '../../services/i18n.service';
 import { Observable } from 'rxjs/Observable';
 import { NgbDatepickerConfig, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-import { CustomDatepickerI18n } from './util/datepicker-i18n';
+import { CustomDatepickerI18n } from '../../util/datepicker-i18n';
 import { NgbDatepickerI18n } from '@ng-bootstrap/ng-bootstrap';
 
 const dayOffset = 4;
@@ -15,10 +15,10 @@ const now = new Date();
 
 @Component({
   selector: 'request-form',
-  providers: [LanguageService, RequestService, NgbDatepickerConfig, I18n, {provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n}],
-  templateUrl: './request-form.component.html'
+  providers: [LanguageService, RequestService, NgbDatepickerConfig, I18nService, {provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n}],
+  templateUrl: './requestform.component.html',
 })
-export class RequestFormComponent implements OnInit {
+export class RequestformComponent implements OnInit {
   languagesObservable: Observable<Language[]>;
   errorMessage: string;
   model = new Request();
@@ -28,7 +28,7 @@ export class RequestFormComponent implements OnInit {
   constructor (private languageService: LanguageService,
     private requestService: RequestService,
     private config: NgbDatepickerConfig,
-    private i18n: I18n) {
+    private i18n: I18nService) {
     config.minDate = {year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate()  + dayOffset};
     config.maxDate = {year: now.getFullYear(), month: now.getMonth() + 1 + maxMonthOffset, day: now.getDate()  + dayOffset};
   }

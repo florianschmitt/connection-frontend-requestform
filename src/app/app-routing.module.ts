@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { RequestFormComponent } from './request-form.component';
+import { RequestformComponent } from './modules/requestform/requestform.component';
 import { AnswerRequestComponent } from './modules/answerrequest/answerrequest.component';
 
 const routes: Routes = [
-    { path: '', component: RequestFormComponent },
-    { path: 'request', component: RequestFormComponent },
+    { path: '', component: RequestformComponent },
+    { path: 'request', component: RequestformComponent },
     { path: 'answerrequest/:id', component: AnswerRequestComponent },
     { path: 'answerrequest/:id/decline', component: AnswerRequestComponent },
 

@@ -1,5 +1,4 @@
 import { AppComponent } from './app.component';
-import { EnvironmentService } from './util/environment.service';
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By }           from '@angular/platform-browser';
@@ -20,7 +19,6 @@ describe('AppComponent', function () {
       ],
       declarations: [ AppComponent ],
       providers: [
-        EnvironmentService,
         { provide: APP_BASE_HREF, useValue: '/' }
       ]
     })

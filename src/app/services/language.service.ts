@@ -1,19 +1,19 @@
-import { Injectable }              from '@angular/core';
-import { HttpClient }          from '@angular/common/http';
-import { Response }          from '@angular/http';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
 
-import { I18n }       from './i18n/I18n.service';
-import { Language } from './model/language';
+import { I18nService } from './i18n.service';
+import { Language } from '../model/language';
 
 @Injectable()
 export class LanguageService {
   private applicationUrl = 'getLanguages';
 
-  constructor (private http: HttpClient, private i18n: I18n) {}
+  constructor (private http: HttpClient, private i18n: I18nService) {}
 
   getLanguages(): Observable<Language[]> {
     let urlWithParams = this.applicationUrl + '?locale=' + this.i18n.language;

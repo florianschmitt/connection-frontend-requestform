@@ -9,11 +9,10 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent }  from './app.component';
-import { RequestFormComponent } from './request-form.component';
-import { EnvironmentService } from './util/environment.service';
+import { RequestformComponent } from './modules/requestform/requestform.component';
 import { UrlInterceptor } from './util/urlinterceptor';
 
-import { I18n } from './i18n/I18n.service';
+import { I18nService } from './services/i18n.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AnswerRequestComponent } from './modules/answerrequest/answerrequest.component';
 
@@ -38,8 +37,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     })
   ],
   providers: [
-    EnvironmentService,
-    I18n,
+    I18nService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: UrlInterceptor,
@@ -48,7 +46,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   declarations: [
     AppComponent,
-    RequestFormComponent,
+    RequestformComponent,
     AnswerRequestComponent],
   bootstrap: [
     AppComponent

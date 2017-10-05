@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { RequestService }       from '../../request.service';
+import { RequestService } from '../../services/request.service';
 import 'rxjs/add/operator/switchMap';
 
 @Component({

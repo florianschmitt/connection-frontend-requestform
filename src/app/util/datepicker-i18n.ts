@@ -1,6 +1,6 @@
 import { Component, Injectable } from '@angular/core';
 import { NgbDatepickerI18n } from '@ng-bootstrap/ng-bootstrap';
-import { I18n } from '../i18n/I18n.service';
+import { I18nService } from '../services/i18n.service';
 
 const I18N_VALUES = {
   de: {
@@ -24,7 +24,7 @@ const I18N_VALUES = {
 @Injectable()
 export class CustomDatepickerI18n extends NgbDatepickerI18n {
 
-  constructor(private _i18n: I18n) {
+  constructor(private _i18n: I18nService) {
     super();
   }
 

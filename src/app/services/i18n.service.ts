@@ -2,7 +2,7 @@ import { Injectable} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
-export class I18n {
+export class I18nService {
   constructor(private translate: TranslateService) {
     translate.addLangs(["en", "de", "ar"]);
     translate.setDefaultLang('de');
