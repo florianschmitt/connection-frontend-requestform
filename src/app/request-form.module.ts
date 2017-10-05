@@ -4,9 +4,6 @@ import { RouterModule } from '@angular/router';
 import { RequestFormComponent } from './request-form.component';
 
 @NgModule({
-  imports: [
-    CommonModule
-  ]//,
-  //declarations: [RequestFormComponent]
+  imports: [ CommonModule ]
 })
 export class RequestFormModule { }

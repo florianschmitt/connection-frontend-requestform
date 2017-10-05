@@ -10,6 +10,9 @@ export class Request {
   email: string;
   phonenumber: string;
 
+  requesterName: string;
+  requesterInstitution: string;
+
   street: string;
   postalCode: string;
   city: string;

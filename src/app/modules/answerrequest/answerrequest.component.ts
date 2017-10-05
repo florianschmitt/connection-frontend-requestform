@@ -49,22 +49,22 @@ export class AnswerRequestComponent implements OnInit {
 
       let err = response;
       if (err != null) {
-        let exception = err['exception'];
+        let errmessage = JSON.parse(err)['message'];
 
-        if (exception == null) {
+        if (errmessage == null) {
           this.message = "unbekannter Fehler";
           return false;
         }
 
-        if (exception.endsWith("VoucherAlreadyAnsweredException")) {
-          this.message = "Anfrage wurde von Ihnen schon beantwortet";
-        } else if (exception.endsWith("VoucherNotFoundException")) {
+        if (errmessage == "illegal voucher id") {
           this.message = "Ungültige Anfrage";
-        } else if (exception.endsWith("RequestAlreadyAcceptedException")) {
+        } else if (errmessage == "voucher was already answered") {
+          this.message = "Anfrage wurde von Ihnen schon beantwortet";
+        } else if (errmessage == "request already accepted") {
           this.message = "Anfrage wurde bereits von jemandem übernommen";
-        } else if (exception.endsWith("RequestWasCanceledException")) {
+        } else if (errmessage == "request was canceled") {
           this.message = "Anfrage wurde storniert";
-        } else if (exception.endsWith("RequestFinishedException")) {
+        } else if (errmessage == "request is finished") {
           this.message = "Anfrage ist abgeschlossen";
         } else {
           this.message = "unbekannter Fehler";

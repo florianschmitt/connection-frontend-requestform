@@ -27,6 +27,8 @@ export class RequestService {
         ocation: request.ocation,
         street: request.street,
         postalCode: request.postalCode,
+        requesterName: request.requesterName,
+        requesterInstitution: request.requesterInstitution,
         city: request.city,
         email: request.email,
         phone: request.phonenumber
@@ -61,7 +63,6 @@ export class RequestService {
   }
 
   private handleError (error: HttpResponse<any> | any) {
-    // In a real world app, you might use a remote logging infrastructure
     let errMsg: string;
     if (error instanceof HttpResponse) {
       const body = error.body || '';
