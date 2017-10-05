@@ -1,5 +1,5 @@
-import {NgbDateStruct, NgbTimeStruct} from '@ng-bootstrap/ng-bootstrap';
-import {Language} from './language';
+import { NgbDateStruct, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
+import { Language } from './language';
 
 export class Request {
 

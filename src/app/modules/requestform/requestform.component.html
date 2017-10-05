@@ -1,4 +1,4 @@
-<div class="btn-group" ngbRadioGroup name="radioBasic" [(ngModel)]="language">
+<div class="btn-group" ngbRadioGroup name="radioBasic" [(ngModel)]="language" [hidden]=true>
   <label ngbButtonLabel class="btn btn-primary">
     <input ngbButton type="radio" value="de">{{ 'german' | translate}}
   </label>
@@ -13,6 +13,9 @@
 <div class="container pt-5">
   <div [hidden]="submitted">
     <h1>{{ 'requestform.title' | translate }}</h1>
+
+    Falls Sie mehrere Anfragen stellen wollen, füllen Sie das Formular bitte für jeden Termin einzeln aus.
+
     <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
       <div class="form-group row pt-3">
         <label for="langSelect" class="col-sm-2 col-form-label">Sprache(n)</label>
@@ -45,7 +48,7 @@
         </div>
 
         <div id="langdHelpBlock" class="col-sm-4 form-text text-muted">
-          Bitte wählen sie einen Zeitpunkt aus. Für mehrere Anfragen bitte für jeden Termin das Formular einzeln ausfüllen. <i>Beachten Sie, dass wir eine Vorlaufzeit von mindestens 3 Tagen benötigen.</i>
+          Bitte wählen sie einen Zeitpunkt aus. <i>Beachten Sie, dass wir eine Vorlaufzeit von mindestens 3 Tagen benötigen.</i>
         </div>
       </div>
 
@@ -63,6 +66,8 @@
       <div class="pt-5"></div>
 
       <h4>Adresse des Termins</h4>
+
+      <p><i>Um unseren ehrenamtlichen Sprachbegleiter_innen einen hohen Zeitaufwand zu ersparen, bitten wir Sie als Treffpunkt den Ort anzugeben, an dem der Termin auch stattfindet (z.B. Adresse der Arztpraxis oder der Behörde).</i></p>
 
       <div class="form-group row">
         <label for="street" class="col-sm-2 col-form-label">Straße / Hausnummer</label>
@@ -85,8 +90,6 @@
 
         <div id="cityHelpBlock" class="col-sm-4 form-text text-muted">Stadt und Postleitzahl des Termins. Bitte geben Sie die vollständige Adresse an.</div>
       </div>
-
-      <p><i>Bitte beachten Sie, dass die Sprachbegleiter ehrenamtlich arbeiten. Um ihnen einen hohen Zeitaufwand zu ersparen, bitten wir Sie darum, bei Arztterminen / Behördengängen davon abzusehen, als Treffpunkt die Adresse der Unterkunft anzugeben. Bitte geben Sie hier die Adresse des Treffpunkts an (z.B. Adresse der Arztpraxis bzw. der Behörde)</i></p>
 
       <div class="pt-5"></div>
 

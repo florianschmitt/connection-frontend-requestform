@@ -10,7 +10,6 @@ import 'rxjs/add/operator/switchMap';
     templateUrl: './answerrequest.component.html'
 })
 export class AnswerRequestComponent implements OnInit {
-
     message: string;
     voucherId: string;
     wasDeclined: boolean = false;
