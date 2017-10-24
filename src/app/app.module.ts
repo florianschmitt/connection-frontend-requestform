@@ -15,6 +15,10 @@ import { UrlInterceptor } from './util/urlinterceptor';
 import { I18nService } from './services/i18n.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AnswerRequestComponent } from './modules/answerrequest/answerrequest.component';
+import { SummaryComponent } from './shared/components/summary/summary.component';
+import { SummaryAnonymComponent } from './shared/components/summaryanonym/summaryanonym.component';
+
+import { LanguageService } from './services/language.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -38,6 +42,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   providers: [
     I18nService,
+    LanguageService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: UrlInterceptor,
@@ -47,7 +52,8 @@ export function HttpLoaderFactory(http: HttpClient) {
   declarations: [
     AppComponent,
     RequestformComponent,
-    AnswerRequestComponent],
+    AnswerRequestComponent,
+    SummaryComponent, SummaryAnonymComponent],
   bootstrap: [
     AppComponent
   ]

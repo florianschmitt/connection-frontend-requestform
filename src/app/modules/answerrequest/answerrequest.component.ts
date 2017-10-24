@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { RequestService } from '../../services/request.service';
+import { RequestAnonym } from '../../model/requestanonym';
 import 'rxjs/add/operator/switchMap';
 
 @Component({
@@ -14,6 +15,7 @@ export class AnswerRequestComponent implements OnInit {
     voucherId: string;
     wasDeclined: boolean = false;
     actionsEnabled: boolean = false;
+    request: RequestAnonym;
 
     constructor(private route: ActivatedRoute, private requestService: RequestService) { }
 
@@ -33,12 +35,18 @@ export class AnswerRequestComponent implements OnInit {
               let success = this.checkForErrorResponseAndSetMessage(res.body);
               if (success) {
                 this.voucherId = voucherId;
+                this.loadRequest();
                 this.ifDeclineRouteDoDecline();
                 this.actionsEnabled = true;
               }
             },
             err => this.checkForErrorResponseAndSetMessage(err.error)
           );
+    }
+
+    private loadRequest() {
+      this.requestService.getRequest(this.voucherId)
+        .subscribe(r => this.request = r);
     }
 
     private checkForErrorResponseAndSetMessage(response: any) : boolean {

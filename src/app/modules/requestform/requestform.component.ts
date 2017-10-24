@@ -16,7 +16,7 @@ const now = new Date();
 
 @Component({
   selector: 'request-form',
-  providers: [LanguageService, RequestService, NgbDatepickerConfig, I18nService, {provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n}],
+  providers: [ RequestService, NgbDatepickerConfig, I18nService, {provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n}],
   templateUrl: './requestform.component.html',
 })
 export class RequestformComponent implements OnInit {
@@ -32,7 +32,7 @@ export class RequestformComponent implements OnInit {
     private config: NgbDatepickerConfig,
     private i18n: I18nService) {
     config.minDate = { year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate() + dayOffset };
-    var endDate = addMonths(now, maxMonthOffset);
+    const endDate = addMonths(now, maxMonthOffset);
     config.maxDate = { year: endDate.getFullYear(), month: endDate.getMonth() + 1, day: endDate.getDate() + dayOffset };
   }
 
@@ -50,34 +50,6 @@ export class RequestformComponent implements OnInit {
     .subscribe(
       id => this.requestid = id,
       error => this.errorMessage = <any>error);
-  }
-
-  getLanguagesList() {
-    if (!this.model.languages) {
-      return '';
-    }
-    return this.model.languages.map(l => l.label).join(', ');
-  }
-
-  getFormattedDateTime() {
-    if (!this.model.date || !this.model.time) {
-      return '';
-    }
-    return this.getFormattedDate() + ' ' + this.getFormattedTime();
-  }
-
-  getFormattedDate() {
-    if (!this.model.date) {
-      return '';
-    }
-    return this.model.date.day + '.' + this.model.date.month + '.' + this.model.date.year;
-  }
-
-  getFormattedTime() {
-    if (!this.model.time) {
-      return '';
-    }
-    return (this.model.time.hour || 0) + ':' + (this.model.time.minute || 0);
   }
 
   set language(language: string) {

@@ -136,31 +136,8 @@
     </form>
   </div>
   <div [hidden]="!submitted">
-    <h2>Sie haben die folgenden Daten übermittelt</h2>
-
+    <h2>Sie haben folgende Daten übermittelt</h2>
     <p class="bg-warning">{{errorMessage}}</p>
-
-    <div class="row">
-      <div class="col-2">Nummer</div>
-      <div class="col-10">{{ requestid }}</div>
-    </div>
-    <div class="row">
-      <div class="col-2">Sprache(n)</div>
-      <div class="col-10">{{ getLanguagesList() }}</div>
-    </div>
-    <div class="row">
-      <div class="col-2">Datum</div>
-      <div class="col-10">{{ getFormattedDateTime() }}</div>
-    </div>
-    <div class="row">
-      <div class="col-2">Anlass</div>
-      <div class="col-10">{{ model.ocation }}</div>
-    </div>
-    <div class="row">
-      <div class="col-2">E-Mail</div>
-      <div class="col-10">{{ model.email }}</div>
-    </div>
-    <!-- <br>
-    <button class="btn btn-primary" (click)="submitted=false">Edit</button> -->
+    <summary [requestId]="requestid" [request]="model"></summary>
   </div>
 </div>

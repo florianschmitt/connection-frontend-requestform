@@ -7,6 +7,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
 
 import { Request } from '../model/request';
+import { RequestAnonym } from '../model/requestanonym';
 
 @Injectable()
 export class RequestService {
@@ -14,6 +15,7 @@ export class RequestService {
   private answerVoucherYesUrl = 'answerRequest/@ID@/yes';
   private answerVoucherNoUrl = 'answerRequest/@ID@/no';
   private answerVoucherStatusUrl = 'answerRequest/@ID@/status';
+  private getRequestUrl = 'getRequest/@ID@';
 
   constructor (private http: HttpClient) {}
 
@@ -50,6 +52,11 @@ export class RequestService {
   answerVoucherStatus(voucherId: string) {
     let applicationUrl = this.answerVoucherStatusUrl.replace(/@ID@/, voucherId);
     return this.http.get(applicationUrl, { observe: 'response' });
+  }
+
+  getRequest(voucherId: string) {
+    let applicationUrl = this.getRequestUrl.replace(/@ID@/, voucherId);
+    return this.http.get<RequestAnonym>(applicationUrl);
   }
 
   private formatDate(request: Request) {

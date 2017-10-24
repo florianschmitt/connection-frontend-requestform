@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-4">Sprache(n)</div>
+  <div class="col-8">{{ getLanguagesList() }}</div>
+</div>
+<div class="row">
+  <div class="col-4">Datum</div>
+  <div class="col-8">{{ getFormattedDateTime() }}</div>
+</div>
+<div class="row">
+  <div class="col-4">Anlass</div>
+  <div class="col-8">{{ request.ocation }}</div>
+</div>
+<div class="row">
+  <div class="col-4">Adresse</div>
+  <div class="col-8">{{ request.street }}, {{request.postalCode}} {{request.city }}</div>
+</div>
+<div class="row">
+  <div class="col-4">Name</div>
+  <div class="col-8">{{ request.requesterName }}</div>
+</div>
+<div class="row">
+  <div class="col-4">Institution</div>
+  <div class="col-8">{{ request.requesterInstitution }}</div>
+</div>
+<div class="row">
+  <div class="col-4">E-Mail</div>
+  <div class="col-8">{{ request.email }}</div>
+</div>
+<div class="row">
+  <div class="col-4">Telefon</div>
+  <div class="col-8">{{ request.phonenumber }}</div>
+</div>
+
+<div class="row">
+  <div class="col-4">Ihre Vorgangsnummer</div>
+  <div class="col-8 font-weight-bold">{{ requestId }}</div>
+</div>

@@ -13,7 +13,27 @@ import { Language } from '../model/language';
 export class LanguageService {
   private applicationUrl = 'getLanguages';
 
-  constructor (private http: HttpClient, private i18n: I18nService) {}
+  private langsMap: Map<number, string>;
+
+  constructor (private http: HttpClient, private i18n: I18nService) {
+    this.langsMap = new Map<number, string>()
+    this.init();
+  }
+
+  init() {
+    this.getLanguages()
+      .subscribe(l => this.addLangs(l, this.langsMap));
+  }
+
+  addLangs(langs: Language[], langsMap: Map<number, string>) {
+    for (let lang of langs) {
+      langsMap.set(lang.id, lang.label);
+    }
+  }
+
+  public getLang(id: number) {
+    return this.langsMap.get(id);
+  }
 
   getLanguages(): Observable<Language[]> {
     let urlWithParams = this.applicationUrl + '?locale=' + this.i18n.language;
