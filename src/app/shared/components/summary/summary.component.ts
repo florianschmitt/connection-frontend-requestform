@@ -24,9 +24,9 @@ export class SummaryComponent implements OnInit {
       return this.request.languages.map(l => l.label).join(', ');
     }
 
-    getOccationString() {
+    getOccasionString() {
       // TODO: hardcoded
-      switch(this.request.occationEnum) {
+      switch(this.request.occasionEnum) {
         case 'DOCTOR': {
           return 'Arzt';
         }
@@ -40,11 +40,11 @@ export class SummaryComponent implements OnInit {
           return 'Freizeitveranstaltung';
         }
         case 'OTHER': {
-          return this.request.occationString;
+          return this.request.occasionString;
         }
       }
 
-      return this.request.occationEnum;
+      return this.request.occasionEnum;
     }
 
     getFormattedDateTime() {

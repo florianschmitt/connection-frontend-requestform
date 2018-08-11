@@ -26,8 +26,8 @@ export class RequestService {
       {
         languageIds: request.languages.map(l => l.id),
         datetime: this.formatDate(request),
-        occationEnum: request.occationEnum,
-        occationString: request.occationEnum == 'OTHER' ? request.occationString : '',
+        occasionEnum: request.occasionEnum,
+        occasionString: request.occasionEnum == 'OTHER' ? request.occasionString : '',
         street: request.street,
         postalCode: request.postalCode,
         requesterName: request.requesterName,
