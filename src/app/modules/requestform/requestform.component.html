@@ -36,7 +36,7 @@
           <a href="http://www.sprachundintegrationsmittler.org/">SprInt (kostenpflichtig)</a>
         </div>
       </div>
-
+      
       <div class="form-group row">
         <label for="date" class="col-sm-2 col-form-label">Zeitpunkt</label>
         <div class="col-sm">
@@ -52,18 +52,34 @@
         </div>
       </div>
 
-      <div class="form-group row">
+      <div class="form-group row pt-3">
+        <label for="occationSelect" class="col-sm-2 col-form-label">Anlasstyp</label>
+        <div class="col-sm">
+          <select required class="form-control" id="occationSelect" [(ngModel)]="model.occationEnum" name="occationEnum">
+            <option value="DOCTOR">Arzt</option>
+            <option value="GOVERNMENT">Amt</option>
+            <option value="ATTORNEY">Anwalt</option>
+            <option value="RECREATION">Freizeitveranstaltung</option>
+            <option value="OTHER">Sonstiges</option>
+          </select>
+        </div>
+        <div id="occationSelectHelpBlock" class="col-sm-4 form-text text-muted">
+          Bitte wählen sie den Anlass aus.
+        </div>
+      </div>
+
+      <div class="form-group row" [hidden]="!occationOther()">
         <label for="exampleTextarea" class="col-sm-2 col-form-label">Anlass</label>
         <div class="col-sm-6">
-          <textarea id="exampleTextarea" required class="form-control"
-            placeholder="z.B. Arzttermin / Behördengang" aria-describedby="passwordHelpBlock" [(ngModel)]="model.ocation" name="ocation" style="height: 100px;"></textarea>
+          <textarea id="exampleTextarea" [required]="occationOther()" class="form-control"
+            placeholder="z.B. Arzttermin / Behördengang" aria-describedby="passwordHelpBlock" [(ngModel)]="model.occationString" name="occationString" style="height: 100px;"></textarea>
         </div>
-        <div id="passwordHelpBlock" class="col-sm-4 form-text text-muted">
+        <div id="occationStringHelpBlock" class="col-sm-4 form-text text-muted">
           Beschreiben Sie kurz den Anlass für den Sie einen Sprachbegleiter benötigen. <i>Bitte geben Sie aus Datenschutzgründen keine personenbezogenen Daten an.</i>
         </div>
       </div>
 
-      <div class="pt-5"></div>
+      <div class="pt-3"></div>
 
       <h4>Adresse des Termins</h4>
 

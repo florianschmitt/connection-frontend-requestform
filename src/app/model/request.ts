@@ -5,6 +5,8 @@ export class Request {
 
   languages: Language[];
   ocation: string;
+  occationEnum: string;
+  occationString: string;
   date: NgbDateStruct;
   time: NgbTimeStruct;
   email: string;

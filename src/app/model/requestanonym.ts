@@ -4,7 +4,7 @@ import { Language } from './language';
 export class RequestAnonym {
 
   languageIds: number[];
-  ocation: string;
+  occationString: string;
   datetime: number[];
 
   street: string;

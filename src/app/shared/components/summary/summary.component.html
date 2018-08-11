@@ -1,37 +1,36 @@
-<div class="row">
-  <div class="col-4">Sprache(n)</div>
-  <div class="col-8">{{ getLanguagesList() }}</div>
-</div>
-<div class="row">
-  <div class="col-4">Datum</div>
-  <div class="col-8">{{ getFormattedDateTime() }}</div>
-</div>
-<div class="row">
-  <div class="col-4">Anlass</div>
-  <div class="col-8">{{ request.ocation }}</div>
-</div>
-<div class="row">
-  <div class="col-4">Adresse</div>
-  <div class="col-8">{{ request.street }}, {{request.postalCode}} {{request.city }}</div>
-</div>
-<div class="row">
-  <div class="col-4">Name</div>
-  <div class="col-8">{{ request.requesterName }}</div>
-</div>
-<div class="row">
-  <div class="col-4">Institution</div>
-  <div class="col-8">{{ request.requesterInstitution }}</div>
-</div>
-<div class="row">
-  <div class="col-4">E-Mail</div>
-  <div class="col-8">{{ request.email }}</div>
-</div>
-<div class="row">
-  <div class="col-4">Telefon</div>
-  <div class="col-8">{{ request.phonenumber }}</div>
-</div>
-
-<div class="row">
-  <div class="col-4">Ihre Vorgangsnummer</div>
-  <div class="col-8 font-weight-bold">{{ requestId }}</div>
-</div>
+  <div class="row">
+    <div class="col-4">Sprache(n)</div>
+    <div class="col">{{ getLanguagesList() }}</div>
+  </div>
+  <div class="row">
+    <div class="col-4">Datum</div>
+    <div class="col">{{ getFormattedDateTime() }}</div>
+  </div>
+  <div class="row">
+    <div class="col-4">Anlass</div>
+    <div class="col">{{ getOccationString() }}</div>
+  </div>
+  <div class="row">
+    <div class="col-4">Adresse</div>
+    <div class="col">{{ request.street }}, {{request.postalCode}} {{request.city }}</div>
+  </div>
+  <div class="row">
+    <div class="col-4">Name</div>
+    <div class="col">{{ request.requesterName }}</div>
+  </div>
+  <div class="row">
+    <div class="col-4">Institution</div>
+    <div class="col">{{ request.requesterInstitution }}</div>
+  </div>
+  <div class="row">
+    <div class="col-4">E-Mail</div>
+    <div class="col">{{ request.email }}</div>
+  </div>
+  <div class="row">
+    <div class="col-4">Telefon</div>
+    <div class="col">{{ request.phonenumber }}</div>
+  </div>
+  <div class="row">
+    <div class="col-4">Ihre Vorgangsnummer</div>
+    <div class="col font-weight-bold">{{ requestId }}</div>
+  </div>

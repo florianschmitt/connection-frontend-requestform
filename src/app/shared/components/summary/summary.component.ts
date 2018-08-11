@@ -24,6 +24,29 @@ export class SummaryComponent implements OnInit {
       return this.request.languages.map(l => l.label).join(', ');
     }
 
+    getOccationString() {
+      // TODO: hardcoded
+      switch(this.request.occationEnum) {
+        case 'DOCTOR': {
+          return 'Arzt';
+        }
+        case 'GOVERNMENT': {
+          return 'Amt';
+        }
+        case 'ATTORNEY': {
+          return 'Anwalt';
+        }
+        case 'RECREATION': {
+          return 'Freizeitveranstaltung';
+        }
+        case 'OTHER': {
+          return this.request.occationString;
+        }
+      }
+
+      return this.request.occationEnum;
+    }
+
     getFormattedDateTime() {
       if (!this.request.date || !this.request.time) {
         return '';

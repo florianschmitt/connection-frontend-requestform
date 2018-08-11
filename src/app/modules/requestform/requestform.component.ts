@@ -59,4 +59,8 @@ export class RequestformComponent implements OnInit {
   get language() {
     return this.i18n.language;
   }
+
+  occationOther() {
+    return this.model.occationEnum == 'OTHER';
+  }
 }
