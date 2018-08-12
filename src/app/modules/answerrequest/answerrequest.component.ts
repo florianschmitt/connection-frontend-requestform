@@ -45,7 +45,7 @@ export class AnswerRequestComponent implements OnInit {
     }
 
     private loadRequest() {
-      this.requestService.getRequest(this.voucherId)
+      this.requestService.getRequestByVoucher(this.voucherId)
         .subscribe(r => this.request = r);
     }
 

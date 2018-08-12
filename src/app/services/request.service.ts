@@ -15,7 +15,9 @@ export class RequestService {
   private answerVoucherYesUrl = 'answerRequest/@ID@/yes';
   private answerVoucherNoUrl = 'answerRequest/@ID@/no';
   private answerVoucherStatusUrl = 'answerRequest/@ID@/status';
-  private getRequestUrl = 'getRequest/@ID@';
+  private getRequestByVoucherUrl = 'getRequest/voucher/@ID@';
+  private getRequestByRequestUrl = 'getRequest/request/@ID@';
+  private cancelRequestUrl = 'declineRequest/@ID@';
 
   constructor (private http: HttpClient) {}
 
@@ -39,6 +41,11 @@ export class RequestService {
         .map(response => response['requestId'])
         .catch(this.handleError);
   }
+  
+  cancelRequest(requestIdentifier: string) {
+    let applicationUrl = this.cancelRequestUrl.replace(/@ID@/, requestIdentifier);
+    return this.http.get(applicationUrl);
+  }
 
   answerVoucherYes(voucherId: string) {
     let applicationUrl = this.answerVoucherYesUrl.replace(/@ID@/, voucherId);
@@ -55,8 +62,13 @@ export class RequestService {
     return this.http.get(applicationUrl, { observe: 'response' });
   }
 
-  getRequest(voucherId: string) {
-    let applicationUrl = this.getRequestUrl.replace(/@ID@/, voucherId);
+  getRequestByVoucher(voucherId: string) {
+    let applicationUrl = this.getRequestByVoucherUrl.replace(/@ID@/, voucherId);
+    return this.http.get<RequestAnonym>(applicationUrl);
+  }
+  
+  getRequest(requestId: string) {
+    let applicationUrl = this.getRequestByRequestUrl.replace(/@ID@/, requestId);
     return this.http.get<RequestAnonym>(applicationUrl);
   }
 

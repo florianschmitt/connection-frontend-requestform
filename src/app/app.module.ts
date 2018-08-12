@@ -15,6 +15,7 @@ import { UrlInterceptor } from './util/urlinterceptor';
 import { I18nService } from './services/i18n.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AnswerRequestComponent } from './modules/answerrequest/answerrequest.component';
+import { CancelRequestComponent } from './modules/cancelrequest/cancelrequest.component';
 import { SummaryComponent } from './shared/components/summary/summary.component';
 import { SummaryAnonymComponent } from './shared/components/summaryanonym/summaryanonym.component';
 
@@ -53,7 +54,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppComponent,
     RequestformComponent,
     AnswerRequestComponent,
-    SummaryComponent, SummaryAnonymComponent],
+    CancelRequestComponent,
+    SummaryComponent, 
+    SummaryAnonymComponent],
   bootstrap: [
     AppComponent
   ]

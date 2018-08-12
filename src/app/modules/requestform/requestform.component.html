@@ -155,5 +155,10 @@
     <h2>Sie haben folgende Daten übermittelt</h2>
     <p class="bg-warning">{{errorMessage}}</p>
     <summary [requestId]="requestid" [request]="model"></summary>
+
+    <div class="pt-3">
+      <button class="btn btn-primary" [routerLink]="['request']">weitere Anfrage stellen</button>
+      <a class="btn btn-link" href="http://www.connection.koeln">zurück zu Connection</a>
+    </div>
   </div>
 </div>
