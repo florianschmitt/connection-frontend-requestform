@@ -11,9 +11,11 @@ import { Language } from '../model/language';
 
 @Injectable()
 export class LanguageService {
-  private applicationUrl = 'getLanguages';
+  private getLanguagesUrl = 'getLanguages';
+  private getEnglishLanguageUrl = 'getEnglishLanguage';
 
   private langsMap: Map<number, string>;
+  private englishLanguage: Language;
 
   constructor (private http: HttpClient, private i18n: I18nService) {
     this.langsMap = new Map<number, string>()
@@ -23,6 +25,9 @@ export class LanguageService {
   init() {
     this.getLanguages()
       .subscribe(l => this.addLangs(l, this.langsMap));
+
+    this.getEnglishLanguageO()
+      .subscribe(l => this.englishLanguage = l);
   }
 
   addLangs(langs: Language[], langsMap: Map<number, string>) {
@@ -35,8 +40,18 @@ export class LanguageService {
     return this.langsMap.get(id);
   }
 
+  public getEnglishLanguage(): Language {
+    return this.englishLanguage;
+  }
+
   getLanguages(): Observable<Language[]> {
-    let urlWithParams = this.applicationUrl + '?locale=' + this.i18n.language;
+    let urlWithParams = this.getLanguagesUrl + '?locale=' + this.i18n.language;
+    return this.http.get(urlWithParams)
+                    .catch(this.handleError);
+  }
+
+  private getEnglishLanguageO(): Observable<Language> {
+    let urlWithParams = this.getEnglishLanguageUrl + '?locale=' + this.i18n.language;
     return this.http.get(urlWithParams)
                     .catch(this.handleError);
   }

@@ -4,7 +4,6 @@ import { Language } from './language';
 export class Request {
 
   languages: Language[];
-  ocation: string;
   occasionEnum: string;
   occasionString: string;
   date: NgbDateStruct;
@@ -18,6 +17,8 @@ export class Request {
   street: string;
   postalCode: string;
   city: string;
+
+  englishLanguage: boolean;
 
   constructor() {
     this.city = "Köln";

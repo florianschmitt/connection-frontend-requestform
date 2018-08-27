@@ -45,6 +45,10 @@ export class RequestformComponent implements OnInit {
   }
 
   onSubmit() {
+    if (this.model.englishLanguage) {
+      this.model.languages.push(this.languageService.getEnglishLanguage())
+    }
+
     this.submitted = true;
     this.requestService.placeRequest(this.model)
     .subscribe(
