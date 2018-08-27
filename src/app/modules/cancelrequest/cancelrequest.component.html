@@ -1,11 +1,18 @@
 <div class="container pt-5">
   <div class="row">
-    <summaryanonym *ngIf="request" [request]="request"></summaryanonym>
+      <h2>Termin stornieren</h2>
+  </div>
+  <div class="row">
+    <summaryanonym class="w-75" *ngIf="request" [request]="request"></summaryanonym>
   </div>
   <div class="row pt-3">
     <form #heroForm="ngForm">
-        <div class="container" *ngIf="message">
-              <label class="col">{{message}}</label>
+        <div *ngIf="message" class="alert alert-success" role="alert">
+            {{message}}
+        </div>
+
+        <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+            {{errorMessage}}
         </div>
 
         <button [disabled]='!actionsEnabled' class="btn btn-success" (click)='cancel()'>Termin Stornieren</button>

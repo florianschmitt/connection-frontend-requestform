@@ -11,7 +11,8 @@ import 'rxjs/add/operator/switchMap';
     templateUrl: './answerrequest.component.html'
 })
 export class AnswerRequestComponent implements OnInit {
-    message: string;
+    successMessage: string;
+    errorMessage: string;
     voucherId: string;
     wasDeclined: boolean = false;
     actionsEnabled: boolean = false;
@@ -56,25 +57,25 @@ export class AnswerRequestComponent implements OnInit {
 
       let err = response;
       if (err != null) {
-        let errmessage = JSON.parse(err)['message'];
+        let errmessage = err['message'];
 
         if (errmessage == null) {
-          this.message = "unbekannter Fehler";
+          this.errorMessage = "unbekannter Fehler";
           return false;
         }
 
         if (errmessage == "illegal voucher id") {
-          this.message = "Ungültige Anfrage";
+          this.errorMessage = "Ungültige Anfrage";
         } else if (errmessage == "voucher was already answered") {
-          this.message = "Anfrage wurde von Ihnen schon beantwortet";
+          this.errorMessage = "Anfrage wurde von Ihnen schon beantwortet";
         } else if (errmessage == "request already accepted") {
-          this.message = "Anfrage wurde bereits von jemandem übernommen";
+          this.errorMessage = "Anfrage wurde bereits von jemandem übernommen";
         } else if (errmessage == "request was canceled") {
-          this.message = "Anfrage wurde storniert";
+          this.errorMessage = "Anfrage wurde storniert";
         } else if (errmessage == "request is finished") {
-          this.message = "Anfrage ist abgeschlossen";
+          this.errorMessage = "Anfrage ist abgeschlossen";
         } else {
-          this.message = "unbekannter Fehler";
+          this.errorMessage = "unbekannter Fehler";
         }
         return false;
       }
@@ -91,7 +92,12 @@ export class AnswerRequestComponent implements OnInit {
     accept() {
       this.requestService.answerVoucherYes(this.voucherId)
         .subscribe(r => {
-          this.message = "Akzeptiert";
+          let success = this.checkForErrorResponseAndSetMessage(r);
+          if (success) {
+            this.successMessage = "Akzeptiert";
+          } else {
+            this.successMessage = '';
+          }
           this.actionsEnabled = false;
         });
     }
@@ -99,7 +105,7 @@ export class AnswerRequestComponent implements OnInit {
     decline() {
       this.requestService.answerVoucherNo(this.voucherId)
         .subscribe(r => {
-          this.message = "Abgelehnt";
+          this.successMessage = "Abgelehnt";
           this.actionsEnabled = false;
         });
     }

@@ -12,6 +12,7 @@ import { RequestService } from '../../services/request.service';
 })
 export class CancelRequestComponent implements OnInit {
   message: string;
+  errorMessage: string;
   requestId: string;
   wasDeclined: boolean = false;
   actionsEnabled: boolean = false;
@@ -32,9 +33,11 @@ export class CancelRequestComponent implements OnInit {
     this.requestId = requestId;
     this.requestService.getRequest(this.requestId)
       .subscribe(res => {
-          this.request = res
-          this.actionsEnabled = true;
-      });
+        this.request = res
+        this.actionsEnabled = true;
+      }, 
+      err => this.checkForErrorResponseAndSetMessage(err.error)
+    );
   }
 
   private checkForErrorResponseAndSetMessage(response: any): boolean {
@@ -45,13 +48,15 @@ export class CancelRequestComponent implements OnInit {
     if (err != null) {
       let errmessage = err['message'];
       if (errmessage == null) {
-        this.message = "unbekannter Fehler";
+        this.errorMessage = "unbekannter Fehler";
         return false;
       }
-      if (errmessage == "request was canceled") {
-        this.message = "Anfrage ist bereits storniert";
+      if (errmessage == "illegal request id") {
+        this.errorMessage = "Ungültige Anfrage";
+      } else if (errmessage == "request was canceled") {
+        this.errorMessage = "Anfrage ist bereits storniert";
       } else {
-        this.message = "unbekannter Fehler";
+        this.errorMessage = "unbekannter Fehler";
       }
       return false;
     }

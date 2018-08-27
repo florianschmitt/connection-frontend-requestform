@@ -170,7 +170,7 @@
     <summary [requestId]="requestid" [request]="model"></summary>
 
     <div class="pt-3">
-      <button class="btn btn-primary" [routerLink]="['request']">weitere Anfrage stellen</button>
+      <button class="btn btn-primary" (click)="refresh()">weitere Anfrage stellen</button>
       <a class="btn btn-link" href="http://www.connection.koeln">zurück zu Connection</a>
     </div>
   </div>

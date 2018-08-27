@@ -1,14 +1,23 @@
 <div class="container pt-5">
-  <div class="form-group row">
-    <summaryanonym *ngIf="request" [request]="request"></summaryanonym>
-
+  <div class="row">
+      <h2>Anfrage beantworten</h2>
+  </div>
+  <div class="row">
+    <summaryanonym class="w-75" *ngIf="request" [request]="request"></summaryanonym>
+  </div>
+  <div class="form-group row pt-3">
     <form #heroForm="ngForm">
-        <div class="container" *ngIf="message">
-              <label class="col-sm-2 col-form-label">{{message}}</label>
+        <div *ngIf="successMessage" class="alert alert-success" role="alert">
+          {{successMessage}}
         </div>
 
-        <button [disabled]='!actionsEnabled' class="btn btn-success" (click)='accept()'>Termin übernehmen</button>
-        <button [disabled]='!actionsEnabled' class="btn btn-warning" (click)='decline()'>Absagen</button>
+        <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+          {{errorMessage}}
+        </div>
+
+      <button [disabled]='!actionsEnabled' class="btn btn-success" (click)='accept()'>Termin übernehmen</button>
+      <button [disabled]='!actionsEnabled' class="btn btn-outline-danger" (click)='decline()'>Absagen</button>
+      <a class="btn btn-link" href="http://www.connection.koeln">zurück zu Connection</a>
     </form>
   </div>
 </div>

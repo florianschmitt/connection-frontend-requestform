@@ -67,4 +67,8 @@ export class RequestformComponent implements OnInit {
   occasionOther() {
     return this.model.occasionEnum == 'OTHER';
   }
+
+  refresh(): void {
+    window.location.reload();
+  }
 }
