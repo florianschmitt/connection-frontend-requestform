@@ -16,7 +16,7 @@ const now = new Date();
 
 @Component({
   selector: 'request-form',
-  providers: [ RequestService, NgbDatepickerConfig, I18nService, {provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n}],
+  providers: [RequestService, NgbDatepickerConfig, I18nService, { provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n }],
   templateUrl: './requestform.component.html',
 })
 export class RequestformComponent implements OnInit {
@@ -25,8 +25,9 @@ export class RequestformComponent implements OnInit {
   model = new Request();
   submitted = false;
   requestid: string;
+  dateSelection: string = 'datetime';
 
-  constructor (
+  constructor(
     private languageService: LanguageService,
     private requestService: RequestService,
     private config: NgbDatepickerConfig,
@@ -48,12 +49,18 @@ export class RequestformComponent implements OnInit {
     if (this.model.englishLanguage) {
       this.model.languages.push(this.languageService.getEnglishLanguage())
     }
+    if (this.dateSelection == 'datetime') {
+      this.model.dateDescription = null;
+    } else if (this.dateSelection == 'dateDescription') {
+      this.model.date = null;
+      this.model.time = null;
+    }
 
     this.submitted = true;
     this.requestService.placeRequest(this.model)
-    .subscribe(
-      id => this.requestid = id,
-      error => this.errorMessage = <any>error);
+      .subscribe(
+        id => this.requestid = id,
+        error => this.errorMessage = <any>error);
   }
 
   set language(language: string) {

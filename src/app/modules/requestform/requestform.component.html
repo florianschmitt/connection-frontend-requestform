@@ -5,7 +5,7 @@
   <label ngbButtonLabel class="btn btn-primary">
     <input ngbButton type="radio" value="en">{{ 'english' | translate}}
   </label>
-  <label ngbButtonLabel class=""class="btn btn-primary">
+  <label ngbButtonLabel class="" class="btn btn-primary">
     <input ngbButton type="radio" value="ar">{{ 'arabic' | translate}}
   </label>
 </div>
@@ -23,9 +23,11 @@
           <div *ngIf="languagesObservable | async; else loading; let languages">
             <select required multiple class="form-control" id="langSelect" [(ngModel)]="model.languages" name="languages">
               <option *ngFor="let l of languages" [value]="l">{{l.label}}</option>
-           </select>
+            </select>
           </div>
-          <ng-template #loading><div class="loader"></div></ng-template>
+          <ng-template #loading>
+            <div class="loader"></div>
+          </ng-template>
         </div>
         <div id="langdHelpBlock" class="col-sm-4 form-text text-muted">
           Bitte wählen sie eine oder mehrere Sprachen aus.
@@ -41,29 +43,53 @@
         <div class="col-sm-2"></div>
         <div class="col-sm form-check">
           <label class="form-check-label" for="englishCheckbox">
-            <input type="checkbox" class="form-check-input" name="active" id="englishCheckbox" [(ngModel)]="model.englishLanguage">
-              Englisch
+            <input type="checkbox" class="form-check-input" name="active" id="englishCheckbox" [(ngModel)]="model.englishLanguage"> Englisch
           </label>
         </div>
         <div id="englishHelpBlock" class="col-sm-4 form-text text-muted">
           Bitte anklicken, falls die Sprachbegleitung auch in Englisch stattfinden kann.
         </div>
       </div>
-
+      <hr>
       <div class="form-group row">
+        <div class="btn-group" ngbRadioGroup name="dateSelection" [(ngModel)]="dateSelection">
+          <label ngbButtonLabel class="btn btn-primary active">
+            <input ngbButton type="radio" value="datetime">Zeitpunkt
+          </label>
+          <label ngbButtonLabel class="btn btn-secondary">
+            <input ngbButton type="radio" value="dateDescription">Beschreibung
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group row" [hidden]="this.dateSelection != 'datetime'">
         <label for="date" class="col-sm-2 col-form-label">Zeitpunkt</label>
         <div class="col-sm">
-          <ngb-datepicker required id="date" name="date" [(ngModel)]="model.date" showWeekNumbers=true></ngb-datepicker>
+          <ngb-datepicker [required]="this.dateSelection == 'datetime'" id="date" name="date" [(ngModel)]="model.date" showWeekNumbers=true></ngb-datepicker>
         </div>
 
         <div class="col-sm">
-          <ngb-timepicker required id="time" name="time" [(ngModel)]="model.time" [minuteStep]="15"></ngb-timepicker>
+          <ngb-timepicker [required]="this.dateSelection == 'datetime'" id="time" name="time" [(ngModel)]="model.time" [minuteStep]="15"></ngb-timepicker>
         </div>
 
         <div id="langdHelpBlock" class="col-sm-4 form-text text-muted">
-          Bitte wählen sie einen Zeitpunkt aus. <i>Beachten Sie, dass wir eine Vorlaufzeit von mindestens 3 Tagen benötigen.</i>
+          Bitte wählen sie einen Zeitpunkt aus.
+          <i>Beachten Sie, dass wir eine Vorlaufzeit von mindestens 3 Tagen benötigen.</i>
         </div>
       </div>
+
+      <div class="form-group row" [hidden]="this.dateSelection != 'dateDescription'">
+        <label for="dateDescription" class="col-sm-2 col-form-label">Beschreibung</label>
+        <div class="col-sm-6">
+          <textarea id="dateDescription" [required]="this.dateSelection == 'dateDescription'" class="form-control" placeholder=""
+            aria-describedby="dateDescriptionHelpBlock" [(ngModel)]="model.dateDescription" name="dateDescription" style="height: 60px;"></textarea>
+        </div>
+        <div id="dateDescriptionHelpBlock" class="col-sm-4 form-text text-muted">
+          Beschreiben Sie den Zeitraum indem Sie einen Sprachbegleiter suchen.
+        </div>
+      </div>
+
+      <hr>
 
       <div class="form-group row pt-3">
         <label for="occasionSelect" class="col-sm-2 col-form-label">Anlasstyp</label>
@@ -82,13 +108,14 @@
       </div>
 
       <div class="form-group row" [hidden]="!occasionOther()">
-        <label for="exampleTextarea" class="col-sm-2 col-form-label">Anlass</label>
+        <label for="occasionString" class="col-sm-2 col-form-label">Anlass</label>
         <div class="col-sm-6">
-          <textarea id="exampleTextarea" [required]="occasionOther()" class="form-control"
-            placeholder="z.B. Arzttermin / Behördengang" aria-describedby="passwordHelpBlock" [(ngModel)]="model.occasionString" name="occasionString" style="height: 100px;"></textarea>
+          <textarea id="occasionString" [required]="occasionOther()" class="form-control" placeholder="z.B. Arzttermin / Behördengang"
+            aria-describedby="passwordHelpBlock" [(ngModel)]="model.occasionString" name="occasionString" style="height: 100px;"></textarea>
         </div>
         <div id="occasionStringHelpBlock" class="col-sm-4 form-text text-muted">
-          Beschreiben Sie kurz den Anlass für den Sie einen Sprachbegleiter benötigen. <i>Bitte geben Sie aus Datenschutzgründen keine personenbezogenen Daten an.</i>
+          Beschreiben Sie kurz den Anlass für den Sie einen Sprachbegleiter benötigen.
+          <i>Bitte geben Sie aus Datenschutzgründen keine personenbezogenen Daten an.</i>
         </div>
       </div>
 
@@ -96,12 +123,16 @@
 
       <h4>Adresse des Termins</h4>
 
-      <p><i>Um unseren ehrenamtlichen Sprachbegleiter_innen einen hohen Zeitaufwand zu ersparen, bitten wir Sie als Treffpunkt den Ort anzugeben, an dem der Termin auch stattfindet (z.B. Adresse der Arztpraxis oder der Behörde).</i></p>
+      <p>
+        <i>Um unseren ehrenamtlichen Sprachbegleiter_innen einen hohen Zeitaufwand zu ersparen, bitten wir Sie als Treffpunkt
+          den Ort anzugeben, an dem der Termin auch stattfindet (z.B. Adresse der Arztpraxis oder der Behörde).</i>
+      </p>
 
       <div class="form-group row">
         <label for="street" class="col-sm-2 col-form-label">Straße / Hausnummer</label>
         <div class="col-sm-6">
-          <input id="street" required class="form-control" [(ngModel)]="model.street" name="street" aria-describedby="streetHelpBlock"/>
+          <input id="street" required class="form-control" [(ngModel)]="model.street" name="street" aria-describedby="streetHelpBlock"
+          />
         </div>
         <div id="streetHelpBlock" class="col-sm-4 form-text text-muted">Straße und Hausnummer des Termins. Bitte geben Sie die vollständige Adresse an.</div>
       </div>
@@ -109,12 +140,13 @@
       <div class="form-group row">
         <label for="city" class="col-sm-2 col-form-label">Stadt</label>
         <div class="col-sm-3">
-          <input id="city" required class="form-control" [(ngModel)]="model.city" name="city"aria-describedby="cityHelpBlock"/>
+          <input id="city" required class="form-control" [(ngModel)]="model.city" name="city" aria-describedby="cityHelpBlock" />
         </div>
 
         <label for="postalcode" class="col-sm-1 col-form-label">PLZ</label>
         <div class="col-sm-2">
-          <input id="postalcode" type="number" ng-maxlength="99999" required class="form-control" [(ngModel)]="model.postalCode" name="postalCode" aria-describedby="cityHelpBlock"/>
+          <input id="postalcode" type="number" ng-maxlength="99999" required class="form-control" [(ngModel)]="model.postalCode" name="postalCode"
+            aria-describedby="cityHelpBlock" />
         </div>
 
         <div id="cityHelpBlock" class="col-sm-4 form-text text-muted">Stadt und Postleitzahl des Termins. Bitte geben Sie die vollständige Adresse an.</div>
@@ -127,16 +159,18 @@
       <div class="form-group row">
         <label for="requesterName" class="col-sm-2 col-form-label">Name</label>
         <div class="col-sm-6">
-          <input id="requesterName" required class="form-control" aria-describedby="requesterNameHelpBlock"  [(ngModel)]="model.requesterName" name="requesterName"/>
+          <input id="requesterName" required class="form-control" aria-describedby="requesterNameHelpBlock" [(ngModel)]="model.requesterName"
+            name="requesterName" />
         </div>
 
-        <div id="requesterNameHelpBlock" class="col-sm-4 form-text text-muted">Bitte Vor und Nachname angeben</div>
+        <div id="requesterNameHelpBlock" class="col-sm-4 form-text text-muted">Bitte Vor- und Nachname angeben</div>
       </div>
 
       <div class="form-group row">
         <label for="requesterInstitution" class="col-sm-2 col-form-label">Institution</label>
         <div class="col-sm-6">
-          <input id="requesterInstitution" class="form-control" aria-describedby="requesterInstitutionHelpBlock"  [(ngModel)]="model.requesterInstitution" name="requesterInstitution"/>
+          <input id="requesterInstitution" class="form-control" aria-describedby="requesterInstitutionHelpBlock" [(ngModel)]="model.requesterInstitution"
+            name="requesterInstitution" />
         </div>
 
         <div id="requesterInstitutionHelpBlock" class="col-sm-4 form-text text-muted">Falls Sie einer Organisation angehören, geben Sie diese bitte an.</div>
@@ -145,16 +179,18 @@
       <div class="form-group row">
         <label for="email" class="col-sm-2 col-form-label">E-Mail Adresse</label>
         <div class="col-sm-6">
-          <input id="email" type="email" required class="form-control" aria-describedby="emailHelpBlock"  [(ngModel)]="model.email" name="email" email/>
+          <input id="email" type="email" required class="form-control" aria-describedby="emailHelpBlock" [(ngModel)]="model.email"
+            name="email" email/>
         </div>
 
-        <div id="emailHelpBlock" class="col-sm-4 form-text text-muted">E-Mail Adresse</div>
+        <div id="emailHelpBlock" class="col-sm-4 form-text text-muted">E-Mail Adresse unter der wir Sie erreichen können.</div>
       </div>
 
       <div class="form-group row">
         <label for="phone" class="col-sm-2 col-form-label">Telefonnummer</label>
         <div class="col-sm-6">
-          <input id="phone" required class="form-control" [(ngModel)]="model.phonenumber" name="phonenumber" aria-describedby="phoneHelpBlock"/>
+          <input id="phone" required class="form-control" [(ngModel)]="model.phonenumber" name="phonenumber" aria-describedby="phoneHelpBlock"
+          />
         </div>
 
         <div id="phoneHelpBlock" class="col-sm-4 form-text text-muted">Telefonnummer</div>

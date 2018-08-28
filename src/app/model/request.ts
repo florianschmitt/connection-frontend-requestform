@@ -8,6 +8,7 @@ export class Request {
   occasionString: string;
   date: NgbDateStruct;
   time: NgbTimeStruct;
+  dateDescription: string;
   email: string;
   phonenumber: string;
 

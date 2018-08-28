@@ -49,7 +49,7 @@ export class SummaryComponent implements OnInit {
 
     getFormattedDateTime() {
       if (!this.request.date || !this.request.time) {
-        return '';
+        return this.request.dateDescription;
       }
       return this.getFormattedDate() + ' ' + this.getFormattedTime();
     }
@@ -58,13 +58,17 @@ export class SummaryComponent implements OnInit {
       if (!this.request.date) {
         return '';
       }
-      return this.request.date.day + '.' + this.request.date.month + '.' + this.request.date.year;
+      return this.pad(this.request.date.day) + '.' + this.pad(this.request.date.month) + '.' + this.request.date.year;
     }
 
     getFormattedTime() {
       if (!this.request.time) {
         return '';
       }
-      return (this.request.time.hour || 0) + ':' + (this.request.time.minute || 0);
+      return this.pad(this.request.time.hour || 0) + ':' + this.pad(this.request.time.minute || 0);
     }
+
+    private pad(n: number) {
+      return (n < 10) ? ('0' + n) : n;
+  }
 }

@@ -1,7 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { NgbDateStruct, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
-import { Language } from '../../../model/language';
 import { RequestAnonym } from '../../../model/requestanonym';
 import { LanguageService } from '../../../services/language.service';
 
@@ -15,10 +12,10 @@ export class SummaryAnonymComponent {
     constructor(private languageService: LanguageService) { }
 
     getLanguagesList() {
-      if (!this.request.languageIds) {
-        return '';
-      }
-      return this.request.languageIds.map(l => this.languageService.getLang(l)).join(', ');
+        if (!this.request.languageIds) {
+            return '';
+        }
+        return this.request.languageIds.map(l => this.languageService.getLang(l)).join(', ');
     }
 
     public timestring(v: number[]) {
@@ -31,7 +28,10 @@ export class SummaryAnonymComponent {
     }
 
     getFormattedDateTime() {
-      return this.timestring(this.request.datetime);
+        if (this.request.datetime == null) {
+            return this.request.dateDescription;
+        }
+        return this.timestring(this.request.datetime);
     }
 
     private pad(n: number) {

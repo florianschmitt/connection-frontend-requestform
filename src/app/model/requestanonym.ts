@@ -6,6 +6,7 @@ export class RequestAnonym {
   languageIds: number[];
   occasion: string;
   datetime: number[];
+  dateDescription: string;
 
   street: string;
   postalCode: string;

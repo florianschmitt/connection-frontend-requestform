@@ -28,6 +28,7 @@ export class RequestService {
       {
         languageIds: request.languages.map(l => l.id),
         datetime: this.formatDate(request),
+        dateDescription: request.dateDescription,
         occasionEnum: request.occasionEnum,
         occasionString: request.occasionEnum == 'OTHER' ? request.occasionString : '',
         street: request.street,
@@ -73,6 +74,9 @@ export class RequestService {
   }
 
   private formatDate(request: Request) {
+    if (request.date == null || request.time == null) {
+      return null;
+    }
     let res = request.date.year + '-' + this.pad(request.date.month) + '-'
           + this.pad(request.date.day) + 'T' + this.pad(request.time.hour) + ':' + this.pad(request.time.minute) + ':00.000Z';
     return res;
