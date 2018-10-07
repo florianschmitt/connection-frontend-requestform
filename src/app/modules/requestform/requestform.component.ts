@@ -24,6 +24,7 @@ export class RequestformComponent implements OnInit {
   errorMessage: string;
   model = new Request();
   submitted = false;
+  acceptPrivacyAgreement = false;
   requestid: string;
   dateSelection: string = 'datetime';
 

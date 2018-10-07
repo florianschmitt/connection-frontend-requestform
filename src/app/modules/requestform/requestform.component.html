@@ -195,6 +195,19 @@
 
         <div id="phoneHelpBlock" class="col-sm-4 form-text text-muted">Telefonnummer</div>
       </div>
+
+      <div class="form-group row">
+        <label for="privacyAccept" class="col-sm-2 col-form-label">Datenschutzerklärung</label>
+        <div class="col-sm form-check">
+          <label class="form-check-label" for="privacyAcceptCheckbox">
+            <input type="checkbox" required class="form-check-input" name="privacyAccept" id="privacyAcceptCheckbox" [(ngModel)]="acceptPrivacyAgreement">Ich erkläre mich einverstanden.
+          </label>
+        </div>
+        <div id="privacyHelpBlock" class="col-sm-4 form-text text-muted">
+          Bitte anklicken, um die <a href="#">Datenschutzerklärung</a> zu akzeptieren.
+        </div>
+      </div>
+
       <div class="pt-5"></div>
       <button type="submit" class="btn btn-success" [disabled]="!heroForm.form.valid">Anfrage senden</button>
       <div class="pb-5"></div>
@@ -203,7 +216,7 @@
   <div [hidden]="!submitted">
     <h2>Sie haben folgende Daten übermittelt</h2>
     <p class="bg-warning">{{errorMessage}}</p>
-    <summary [requestId]="requestid" [request]="model"></summary>
+    <summarylist [requestId]="requestid" [request]="model"></summarylist>
 
     <div class="pt-3">
       <button class="btn btn-primary" (click)="refresh()">weitere Anfrage stellen</button>

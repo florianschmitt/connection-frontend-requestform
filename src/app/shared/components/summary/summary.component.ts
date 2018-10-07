@@ -5,7 +5,7 @@ import { Language } from '../../../model/language';
 import { Request } from '../../../model/request';
 
 @Component({
-    selector: 'summary',
+    selector: 'summarylist',
     templateUrl: './summary.component.html'
 })
 export class SummaryComponent implements OnInit {
