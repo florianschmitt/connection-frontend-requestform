@@ -16,6 +16,7 @@ import { I18nService } from './services/i18n.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AnswerRequestComponent } from './modules/answerrequest/answerrequest.component';
 import { CancelRequestComponent } from './modules/cancelrequest/cancelrequest.component';
+import { FeedbackComponent } from './modules/feedback/feedback.component';
 import { SummaryComponent } from './shared/components/summary/summary.component';
 import { SummaryAnonymComponent } from './shared/components/summaryanonym/summaryanonym.component';
 
@@ -56,7 +57,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     AnswerRequestComponent,
     CancelRequestComponent,
     SummaryComponent, 
-    SummaryAnonymComponent],
+    SummaryAnonymComponent, 
+    FeedbackComponent],
   bootstrap: [
     AppComponent
   ]
