@@ -1,0 +1,58 @@
+<div class="container pt-5">
+  <div class="row">
+      <h2>Feedback schicken</h2>
+  </div>
+  <div class="row">
+    <summaryanonym class="w-75" *ngIf="request" [request]="request"></summaryanonym>
+  </div>
+  <div class="form-group row pt-3">
+    <form #heroForm="ngForm" class="">
+        <div *ngIf="successMessage" class="alert alert-success" role="alert">
+          {{successMessage}}
+        </div>
+
+        <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+          {{errorMessage}}
+        </div>
+
+
+        <div [hidden]="!hasOccurredVisible">
+          Hat die Sprachbegleitung stattgefunden?
+          <button [disabled]='!actionsEnabled || (wasPositiveVisible || wasCanceledVisible)' class="btn btn-success" (click)='step1(true)'>Ja</button>
+          <button [disabled]='!actionsEnabled || (wasPositiveVisible || wasCanceledVisible)' class="btn btn-outline-danger" (click)='step1(false)'>Nein</button>
+        </div>
+
+        <div [hidden]="!wasPositiveVisible" class="pt-1">
+            Bist du zufrieden mit der Zusammenarbeit?
+            <button [disabled]='!actionsEnabled || !commentHidden' class="btn btn-success" (click)='step2(true)'>Ja</button>
+            <button [disabled]='!actionsEnabled || !commentHidden' class="btn btn-outline-danger" (click)='step2(false)'>Nein</button>
+        </div>
+
+        <div [hidden]="!wasCanceledVisible" class="pt-1">
+            Wurde dir vorher abgesagt?
+            <button [disabled]='!actionsEnabled' class="btn btn-success" (click)='step2(true)'>Ja</button>
+            <button [disabled]='!actionsEnabled' class="btn btn-outline-danger" (click)='step2(false)'>Nein</button>
+        </div>
+
+        <div class="form-group" [hidden]="commentHidden">
+          <label for="comment" class="col-2 col-form-label">Kommentar</label>
+          <div class="col-10">
+            <textarea id="comment" [required]="false" class="form-control" placeholder=""
+              [(ngModel)]="commentField" name="comment" style="height: 100px;"></textarea>
+          </div>
+
+          <button [disabled]='!actionsEnabled || !commentField' class="mt-1 btn btn-success" (click)='sendAfterComment()'>Abschicken</button>
+        </div>
+
+        <div [hidden]="confirmationHidden" class="mt-2 alert alert-success">
+          Vielen Dank für alles!<br>
+
+          Dir steht eine Aufwandsentschädigung und eine Teilnahmebescheinigung zu. 
+          Du kannst sie dir bei uns im Büro abholen. Bitte schreibe uns hierfür 
+          eine E-Mail an <a href="mailto:info@connection.koeln">info@connection.koeln</a>
+        </div>
+
+      <a class="btn btn-link" href="http://www.connection.koeln">zurück zu Connection</a>
+    </form>
+  </div>
+</div>

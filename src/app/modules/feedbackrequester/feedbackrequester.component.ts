@@ -9,9 +9,9 @@ import { RequestService } from '../../services/request.service';
 @Component({
   selector: 'feedback',
   providers: [FeedbackService, RequestService],
-  templateUrl: './feedback.component.html'
+  templateUrl: './feedbackrequester.component.html'
 })
-export class FeedbackComponent implements OnInit {
+export class FeedbackRequesterComponent implements OnInit {
   successMessage: string;
   errorMessage: string;
   requestId: string;
@@ -34,28 +34,29 @@ export class FeedbackComponent implements OnInit {
   }
 
   private setRequestId(requestId: string) {
+    this.feedbackService.hasFeedbackRequester(requestId)
+    .subscribe(res => {
+      if (res['result']) {
+        this.errorMessage = "Vorgang schon bewertet";
+      } else {
+        this.loadRequest(requestId);
+      }
+    });
+  }
+
+  private loadRequest(requestId: string) {
     this.requestService.getRequest(requestId)
       .subscribe(
         res => {
-          // let success = this.checkForErrorResponseAndSetMessage(res.body);
-          // if (success) {
           this.request = res;
           this.requestId = requestId;
-          // this.loadRequest();
-          // this.ifDeclineRouteDoDecline();
           this.actionsEnabled = true;
-          // }
         },
         err => {
           this.errorMessage = "Vorgang nicht vorhanden";
-        }//this.checkForErrorResponseAndSetMessage(err.error)
+        }
       );
   }
-
-  // private loadRequest() {
-  //   this.requestService.getRequestByVoucher(this.voucherId)
-  //     .subscribe(r => this.request = r);
-  // }
 
   private checkForErrorResponseAndSetMessage(response: any): boolean {
     if (response == null || response === '') {
@@ -90,7 +91,7 @@ export class FeedbackComponent implements OnInit {
   }
 
   private sendFeedback(positive: boolean) {
-    this.feedbackService.sendFeedback(this.requestId, positive, this.commentField)
+    this.feedbackService.sendFeedbackRequester(this.requestId, positive, this.commentField)
     .subscribe(r => {
       let success = this.checkForErrorResponseAndSetMessage(r);
       if (success) {
